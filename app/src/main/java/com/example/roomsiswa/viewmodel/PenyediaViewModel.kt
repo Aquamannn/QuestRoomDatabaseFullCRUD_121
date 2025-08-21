@@ -1,4 +1,4 @@
-package com.example.roomsiswa.viemodel
+package com.example.roomsiswa.viewmodel
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -11,6 +11,7 @@ object PenyediaViewModel {
 
         initializer {
             HomeViewModel(aplikasiSiswa().container.repositoriSiswa)
+
         }
 
         initializer {

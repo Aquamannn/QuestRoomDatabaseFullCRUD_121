@@ -48,4 +48,3 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 
 [bundles]
 room = ["room-runtime","room-ktx"]
-
