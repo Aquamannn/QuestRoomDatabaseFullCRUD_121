@@ -1,5 +1,6 @@
 package com.example.roomsiswa.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -33,6 +34,8 @@ object DestinasiHome : DestinasiNavigasi {
 @Composable
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
+    //edit5
+    navigateToItemUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
@@ -63,6 +66,8 @@ fun HomeScreen(
         val uiStateSiswa by viewModel.homeUiState.collectAsState()
         BodyHome(
             itemSiswa = uiStateSiswa.listSiswa,
+            //edit 6
+            onSiswaClick = navigateToItemUpdate,
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
@@ -89,6 +94,8 @@ fun SiswaTopAppBar(
 @Composable
 fun BodyHome(
     itemSiswa: List<Siswa>,
+    // edit 3
+    onSiswaClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -104,6 +111,8 @@ fun BodyHome(
         } else {
             ListSiswa(
                 itemSiswa = itemSiswa,
+                //Edit 4
+                onSiswaClick = {onSiswaClick(it.id)},
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )
         }
@@ -113,13 +122,18 @@ fun BodyHome(
 @Composable
 fun ListSiswa(
     itemSiswa: List<Siswa>,
+    //edit 1
+    onSiswaClick: (Siswa) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = Modifier) {
         items(items = itemSiswa, key = { it.id }) { person ->
             DataSiswa(
                 siswa = person,
-                modifier = modifier.padding(dimensionResource(id = R.dimen.padding_small))
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+                    //edit 2
+                    .clickable {onSiswaClick(person)}
             )
         }
     }
